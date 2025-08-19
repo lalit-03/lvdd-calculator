@@ -173,13 +173,13 @@ def main():
             
             col1a, col1b = st.columns(2)
             with col1a:
-                hdl = st.number_input("HDL (mg/dL)", min_value=0, max_value=200, value=50, step=1)
-                ldl = st.number_input("LDL (mg/dL)", min_value=0, max_value=400, value=100, step=1)
+                hdl = st.number_input("HDL (mg/dL)", min_value=0, max_value=500, value=50, step=1)
+                ldl = st.number_input("LDL (mg/dL)", min_value=0, max_value=500, value=100, step=1)
             with col1b:
-                total_chol = st.number_input("Total Cholesterol (mg/dL)", min_value=0, max_value=500, value=200, step=1)
-                hba1c = st.number_input("HbA1c (%)", min_value=3.0, max_value=15.0, value=5.7, step=0.1)
+                total_chol = st.number_input("Total Cholesterol (mg/dL)", min_value=0, max_value=1000, value=200, step=1)
+                hba1c = st.number_input("HbA1c (%)", min_value=1.0, max_value=25.0, value=5.7, step=0.1)
             
-            tgi = st.number_input("TGI", min_value=0.0, max_value=10.0, value=1.0, step=0.1, 
+            tgi = st.number_input("TGI", min_value=0.0, max_value=50.0, value=1.0, step=0.1, 
                                 help="Triglyceride-Glucose Index")
             
             # Form submission
