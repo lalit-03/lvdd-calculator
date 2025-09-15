@@ -179,8 +179,11 @@ def main():
                 total_chol = st.number_input("Total Cholesterol (mg/dL)", min_value=0, max_value=1000, value=200, step=1)
                 hba1c = st.number_input("HbA1c (%)", min_value=1.0, max_value=25.0, value=5.7, step=0.1)
             
-            tgi = st.number_input("TGI", min_value=0.0, max_value=50.0, value=1.0, step=0.1, 
-                                help="Triglyceride-Glucose Index")
+            # tgi = st.number_input("TGI", min_value=0.0, max_value=50.0, value=1.0, step=0.1, 
+                                # help="Triglyceride-Glucose Index")
+            st.subheader("TGI Components")
+            triglycerides = st.number_input("Fasting Triglycerides (mg/dL)", min_value=10, max_value=1000, value=150, step=1)
+            fasting_glucose = st.number_input("Fasting Glucose (mg/dL)", min_value=30, max_value=500, value=90, step=1)
             
             # Form submission
             calculate_button = st.form_submit_button("Calculate LVDD Probability", type="primary")
@@ -190,6 +193,11 @@ def main():
         
         if calculate_button:
             # Calculate probability
+            if triglycerides <= 0 or fasting_glucose <= 0:
+                st.error("Triglycerides and Fasting Glucose values must be positive.")
+                st.stop()
+                tgi = np.log((triglycerides * fasting_glucose) / 2)
+            
             probability, linear_predictor = calculate_lvdd_probability(
                 age, bmi, hdl, ldl, total_chol, hba1c, tgi
             )
@@ -233,6 +241,8 @@ def main():
                 'ldl': ldl,
                 'total_cholesterol': total_chol,
                 'hba1c': hba1c,
+                'triglycerides': triglycerides,
+                'fasting_glucose': fasting_glucose,
                 'tgi': tgi,
                 'linear_predictor': linear_predictor,
                 'probability': probability,
