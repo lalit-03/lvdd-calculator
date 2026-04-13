@@ -196,7 +196,9 @@ def main():
             if triglycerides <= 0 or fasting_glucose <= 0:
                 st.error("Triglycerides and Fasting Glucose values must be positive.")
                 st.stop()
-                tgi = np.log((triglycerides * fasting_glucose) / 2)
+            
+            tgi = np.log((triglycerides * fasting_glucose) / 2)
+
             
             probability, linear_predictor = calculate_lvdd_probability(
                 age, bmi, hdl, ldl, total_chol, hba1c, tgi
